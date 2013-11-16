@@ -1,9 +1,15 @@
+require "bundler/setup"
 require "hasu"
 
-calss Pong < Hasu::Window
+Hasu.load "ball.rb"
+
+class Pong < Hasu::Window
   WIDTH = 768
   HEIGHT = 576
 
-def initalize
-  super(WIDTH, HEIGHT, false)
+  def initialize
+    super(WIDTH, HEIGHT, false)
+  end
 end
+
+Pong.run

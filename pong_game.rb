@@ -37,12 +37,35 @@ class Pong < Hasu::Window
   def update
     @ball.move!
 
+    if button_down?(Gosu::KbW)
+      @left_paddle.up!
+    end
+    
+    if button_down?(Gosu::KbS)
+      @left_paddle.down!
+    end
+    
+    if button_down?(Gosu::KbUp)
+      @right_paddle.up!
+    end
+    
+    if button_down?(Gosu::KbDown)
+      @right_paddle.down!
+    end
+
+    if @ball.intersect?(@left_paddle)
+      @ball.bounce_off_paddle!(@left_paddle)
+    end
+    if @ball.intersect?(@right_paddle)
+      @ball.bounce_off_paddle!(@right_paddle)
+    end
+
     if @ball.off_left?
-      @left_score += 1
+      @right_score += 1
       @ball = Ball.new
     end
     if @ball.off_right? 
-      @right_score += 1
+      @left_score += 1
       @ball = Ball.new
     end
   end
